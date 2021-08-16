@@ -36,3 +36,23 @@
     transform: rotate(360deg);
   }
 }
+.project-wrapper {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+.number-input .btn-input {
+  width: 100%;
+  margin: 0 auto;
+}
+.btn-input {
+  margin: 10px;
+}
+.content-wrapper {
+  /* Center vertically */
+  position: absolute;
+  margin-top: 12%;
+}
+.title .speaker .image {
+  margin: 2px;
+}
