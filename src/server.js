@@ -9,7 +9,34 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.post("/cors", (req, res) => {
-  console.log(req.body);
+  let inputId = req.body.videoId;
+
+  fetch("https://graphql.ted.com", {
+    method: "POST",
+
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    },
+    body: JSON.stringify({
+      query: `
+      query {
+        video(id:${inputId}) {
+          title
+          speakers {
+            firstName
+            lastName
+          }
+          primaryImageSet {
+            url
+          }
+        }
+      }
+      `,
+    }),
+  })
+    .then((res) => res.json())
+    .then((data) => res.json(data));
 });
 
 app.listen(4000, () => console.log(`Listening on port 4000`));

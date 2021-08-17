@@ -11,54 +11,25 @@ function App() {
   const handleClick = async () => {
     let input = { videoId: inputId };
     console.log(input);
-    axios
-      .post("http://localhost:4000/cors", input, null)
-      .then((res) => console.log(res));
+    axios.post("http://localhost:4000/cors", input, null).then((res) => {
+      console.log(res);
+      if (res.data.data.video === null || res.data.data.video === undefined) {
+        setVideoTitle("Could not find video title");
+        setVideoSpeaker("Could not find speaker");
+        setVideoImage("Could not find image");
+      } else {
+        setVideoTitle(res.data.data.video.title);
+        setVideoSpeaker(
+          res.data.data.video.speakers[0].firstName +
+            " " +
+            res.data.data.video.speakers[0].lastName
+        );
+        setVideoImage(res.data.data.video.primaryImageSet[0].url);
+      }
 
-    // .then
-    // fetch("https://graphql.ted.com", {
-    //   method: "POST",
-
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "Access-Control-Allow-Origin": "*",
-    //   },
-    //   body: JSON.stringify({
-    //     query: `
-    //   query {
-    //     video(id:${inputId}) {
-    //       title
-    //       speakers {
-    //         firstName
-    //         lastName
-    //       }
-    //       primaryImageSet {
-    //         url
-    //       }
-    //     }
-    //   }
-    //   `,
-    //   }),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     if (data.data.video === null) {
-    //       setVideoTitle("Could not find video title");
-    //       setVideoSpeaker("Could not find speaker");
-    //       setVideoImage("Could not find image");
-    //     } else {
-    //       setVideoTitle(data.data.video.title);
-    //       setVideoSpeaker(
-    //         data.data.video.speakers[0].firstName +
-    //           " " +
-    //           data.data.video.speakers[0].lastName
-    //       );
-    //       setVideoImage(data.data.video.primaryImageSet[0].url);
-    //     }
-
-    //     console.log(data.data.video);
-    //     setVideoData(true);
-    //   })
+      // console.log(res.data.data.data.video);
+      setVideoData(true);
+    });
   };
 
   const renderInfo = (title, speaker, image) => {
