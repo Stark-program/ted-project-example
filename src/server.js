@@ -16,7 +16,6 @@ app.post("/cors", (req, res) => {
 
     headers: {
       "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
     },
     body: JSON.stringify({
       query: `
