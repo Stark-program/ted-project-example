@@ -11,10 +11,8 @@ function App() {
 
   const RenderInfo = () => {
     let { id } = useParams();
-    console.log(id);
 
     axios.post("http://localhost:4000/cors", id, null).then((res) => {
-      console.log(res);
       if (res.data.errors) {
         return setError(true);
       }
