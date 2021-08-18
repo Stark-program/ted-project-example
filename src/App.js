@@ -30,7 +30,7 @@ function App() {
     return (
       <div className="content-wrapper">
         <div className="video-title">
-          <h1 className="title">{`Title of video: ${videoTitle}`}</h1>
+          <h1 className="title">{`${videoTitle}`}</h1>
         </div>
         <div className="video-speaker">
           <h4 className="speaker">{`Speaker: ${videoSpeaker}`}</h4>
