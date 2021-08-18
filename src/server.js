@@ -9,7 +9,8 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.post("/cors", (req, res) => {
-  let inputId = req.body.videoId;
+  let inputId = req.body;
+  let id = Object.keys(JSON.parse(JSON.stringify(inputId)));
 
   fetch("https://graphql.ted.com", {
     method: "POST",
@@ -20,7 +21,7 @@ app.post("/cors", (req, res) => {
     body: JSON.stringify({
       query: `
       query {
-        video(id:${inputId}) {
+        video(id:${id}) {
           title
           speakers {
             firstName
